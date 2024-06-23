@@ -11,7 +11,7 @@ class Partida:
         self.__jugador1 = jugador1
         self.__jugador2 = jugador2
         self.__escenario = escenario
-        self.__id_partida = Partida.aumentar_id()
+        self.__id_partida = Partida.__aumentar_id()
 
     @property
     def jugador1(self) -> Jugador:
@@ -42,7 +42,7 @@ class Partida:
         return self.__id_partida
 
     @classmethod
-    def aumentar_id(cls) -> int:
+    def __aumentar_id(cls) -> int:
         cls.__id_partida += 1
         return cls.__id_partida
 

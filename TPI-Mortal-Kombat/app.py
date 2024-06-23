@@ -43,9 +43,6 @@ def elegir_luchador() -> None:
             except ValueError:
                 print("Ingrese un número válido. Intente de nuevo.")
 
-        
-        
-
 # Inicia una nueva partida entre los dos jugadores.
 def iniciar_partida() -> None:
     elegir_luchador()
