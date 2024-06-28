@@ -1,7 +1,7 @@
 from personaje import Personaje
 
 class Jugador:
-    def __init__(self, personaje: Personaje, nombre: str = "Jugador", partidas_ganadas:int=0) -> None:
+    def __init__(self, personaje: Personaje, nombre: str = "Jugador", partidas_ganadas:int = 0) -> None:
         self.__nombre = nombre
         self.__personaje = personaje
         self.__partidas_ganadas = partidas_ganadas
@@ -30,6 +30,7 @@ class Jugador:
     def partidas_ganadas(self, nueva_partida_ganada: int) -> None:
         self.__partidas_ganadas = nueva_partida_ganada
 
+    # El nivel del jugador aumenta cada 3 partidas ganadas.
     @property
     def nivel(self) -> int:
         return self.partidas_ganadas // 3

@@ -47,12 +47,14 @@ class Partida:
         cls.__id_partida += 1
         return cls.__id_partida
 
+    # Escoge un ataque y se lo aplica al enemigo.
     def elegir_ataque(self, atacante:Personaje, enemigo:Personaje) -> str:
         lista_ataques = [atacante.ataque_basico, atacante.ataque_arma, atacante.ataque_especial]
         ataque_elegido = random.choice(lista_ataques)
         time.sleep(1.5)
         return ataque_elegido(enemigo)
-       
+    
+    # Reinicia la salud y el poder de los luchadores.
     def reiniciar_personajes(self) -> None:
         self.jugador1.personaje.salud = 100
         self.jugador2.personaje.salud = 100
@@ -60,6 +62,7 @@ class Partida:
         self.jugador1.personaje.poder = 0
         self.jugador2.personaje.poder = 0
 
+    # Verifica si algun luchador murió para finalizar la partida.
     def fin_partida(self) -> bool:
         luchador1 = self.jugador1.personaje
         luchador2 = self.jugador2.personaje

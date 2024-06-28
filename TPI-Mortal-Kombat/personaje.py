@@ -4,7 +4,7 @@ class Personaje:
     
     __nombres_personajes = set()
 
-    def __init__(self, nombre: str, salud: int, descripcion: str, arma: Arma, ataque:int=15, defensa:int=5, poder:int=0) -> None:
+    def __init__(self, nombre: str, salud: int, descripcion: str, arma: Arma, ataque:int = 15, defensa:int = 5, poder:int = 0) -> None:
         self.__nombre = Personaje.__verificar_nombre(nombre)
         self.__salud = salud
         self.__descripcion = descripcion
@@ -68,6 +68,7 @@ class Personaje:
     def arma(self) -> Arma:
         return self.__arma
 
+    # Verifica si el personaje está muerto.
     def muerto(self) -> bool:
         return self.__salud == 0
     
@@ -85,8 +86,10 @@ class Personaje:
             if self.ataque * 1.5 < enemigo.salud:
                 puede_atacar = True
 
+        # Si el daño del ataque es menor que la salud del enemigo, el ataque puede realizarse.
         if puede_atacar:
             return True
+        # Si el daño producido es mayor que la salud del enemigo, significa que ese ataque lo mata.
         else:
             enemigo.salud = 0 
             return False

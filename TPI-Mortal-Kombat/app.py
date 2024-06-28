@@ -36,7 +36,7 @@ def elegir_luchador() -> None:
                     lista_jugadores[jugador].personaje = luchador_elegido
                     print(f"{lista_jugadores[jugador].nombre} eligió a {luchador_elegido.nombre}")
                     
-                    # Remover el luchador elegido de los disponibles
+                    # Remueve el luchador elegido de los disponibles
                     luchadores_disponibles.pop(indice - 1)
                     
                     opcion_valida = True
@@ -49,6 +49,7 @@ def elegir_luchador() -> None:
 def iniciar_partida() -> None:
     elegir_luchador()
 
+    # Se crea una partida
     partida = Partida(lista_jugadores[0], lista_jugadores[1], random.choice(escenarios)) 
 
     luchador1 = partida.jugador1.personaje
