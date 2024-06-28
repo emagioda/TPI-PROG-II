@@ -1,5 +1,6 @@
 from jugador import Jugador
 from escenario import Escenario
+from personaje import Personaje
 import random
 import time
 
@@ -46,51 +47,24 @@ class Partida:
         cls.__id_partida += 1
         return cls.__id_partida
 
-    def comenzar_partida(self) -> None:
+    def elegir_ataque(self, atacante:Personaje, enemigo:Personaje) -> str:
+        lista_ataques = [atacante.ataque_basico, atacante.ataque_arma, atacante.ataque_especial]
+        ataque_elegido = random.choice(lista_ataques)
+        time.sleep(1.5)
+        return ataque_elegido(enemigo)
+       
+    def reiniciar_personajes(self) -> None:
+        self.jugador1.personaje.salud = 100
+        self.jugador2.personaje.salud = 100
+
+        self.jugador1.personaje.poder = 0
+        self.jugador2.personaje.poder = 0
+
+    def fin_partida(self) -> bool:
         luchador1 = self.jugador1.personaje
         luchador2 = self.jugador2.personaje
-        lista_luchadores = [luchador1, luchador2]
-        juego_posible = True
 
-        print(self)
-        for i in range(3, 0, -1):
-            print(f"     {i}")
-            time.sleep(1.5)
-        print("¡¡ FIGHT !!\n")
-
-        while juego_posible:
-            atacante = random.choice(lista_luchadores)
-            enemigo = luchador2 if atacante == luchador1 else luchador1
-             
-            if luchador1.salud < 30 or luchador2.salud < 30:
-                if self.escenario.trampa_mortal:
-                    print(f"{atacante.nombre} lazó a {enemigo.nombre} a la Trampa Mortal")
-                    print("TRAMPA MORTAL ACTIVA")
-                    self.escenario.activar_trampa(enemigo)
-
-            lista_ataques = [atacante.ataque_basico, atacante.ataque_arma, atacante.ataque_especial]
-            ataque_elegido = random.choice(lista_ataques)
-            time.sleep(1.5)
-            ataque_elegido(enemigo)
-
-            print(f"""
-Salud {luchador1.nombre}: {luchador1.salud}%
-Salud {luchador2.nombre}: {luchador2.salud}%
-""")
-
-            if luchador1.muerto() or luchador2.muerto():
-                juego_posible = False
-                if luchador1.salud != 0:
-                    print(f"{luchador1.nombre} is WIN")
-                    self.jugador1.partidas_ganadas += 1
-                else:
-                    print(f"{luchador2.nombre} is WIN")
-                    self.jugador2.partidas_ganadas += 1
-
-        luchador1.salud = 100
-        luchador1.poder = 0
-        luchador2.salud = 100
-        luchador2.poder = 0
+        return luchador1.muerto() or luchador2.muerto()
 
     def __str__(self) -> str:
         return f"\nPartida: {self.id_partida} - {self.jugador1.personaje.nombre} VS {self.jugador2.personaje.nombre} en {self.escenario}"

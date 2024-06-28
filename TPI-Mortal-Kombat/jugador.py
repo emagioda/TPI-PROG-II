@@ -1,10 +1,10 @@
 from personaje import Personaje
 
 class Jugador:
-    def __init__(self, personaje: Personaje, nombre: str = "Jugador") -> None:
+    def __init__(self, personaje: Personaje, nombre: str = "Jugador", partidas_ganadas:int=0) -> None:
         self.__nombre = nombre
         self.__personaje = personaje
-        self.__partidas_ganadas = 0
+        self.__partidas_ganadas = partidas_ganadas
     
     @property
     def nombre(self) -> str:

@@ -4,7 +4,6 @@ from jugador import Jugador
 from escenario import Escenario
 from personaje import Personaje
 from arma import Arma
-import random
 
 lista_partidas = []
 lista_jugadores = []
@@ -42,6 +41,3 @@ jugador2 = Jugador(luchadores[0])
 
 lista_jugadores.append(jugador1)
 lista_jugadores.append(jugador2)
-
-# Crear Partida
-jugar = Partida(lista_jugadores[0], lista_jugadores[1], random.choice(escenarios))

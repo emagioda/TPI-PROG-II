@@ -4,14 +4,14 @@ class Personaje:
     
     __nombres_personajes = set()
 
-    def __init__(self, nombre: str, salud: int, descripcion: str, arma: Arma) -> None:
+    def __init__(self, nombre: str, salud: int, descripcion: str, arma: Arma, ataque:int=15, defensa:int=5, poder:int=0) -> None:
         self.__nombre = Personaje.__verificar_nombre(nombre)
         self.__salud = salud
         self.__descripcion = descripcion
         self.__arma = arma
-        self.__ataque = 15
-        self.__defensa = 5
-        self.__poder = 0
+        self.__ataque = ataque
+        self.__defensa = defensa
+        self.__poder = poder
 
     @property
     def nombre(self) -> str:
@@ -91,29 +91,34 @@ class Personaje:
             enemigo.salud = 0 
             return False
 
-    def ataque_basico(self, enemigo: 'Personaje') -> None:
+    def ataque_basico(self, enemigo: 'Personaje') -> str:
         if self.validar_ataque("basico", enemigo):
             daño = self.ataque - enemigo.defensa
             enemigo.salud -= max(0, daño)
-            print(f"{self.nombre} da un golpe.")
             self.poder += 1
+            return f"{self.nombre} da un golpe."
+        return f"{enemigo.nombre} recibe un golpe y muere."
 
-    def ataque_especial(self, enemigo: 'Personaje') -> None:
+    def ataque_especial(self, enemigo: 'Personaje') -> str:
         if self.poder >= 5:
             if self.validar_ataque("especial", enemigo):
                 daño = self.ataque * 3 - enemigo.defensa
                 enemigo.salud -= max(0, daño)
-                print(f"{self.nombre} lanza un Ataque Especial.")
                 self.poder -= 5
+                return f"{self.nombre} lanza un Ataque Especial."
+            else: 
+                return f"{enemigo.nombre} recibe un Ataque Especial y muere."
         else:
-            print(f"{enemigo.nombre} esquiva el ataque.")
+            return f"{enemigo.nombre} esquiva el ataque."
 
-    def ataque_arma(self, enemigo: 'Personaje') -> None:
+    def ataque_arma(self, enemigo: 'Personaje') -> str:
         if self.validar_ataque("arma", enemigo):
             daño = self.ataque * 1.5 - enemigo.defensa
             enemigo.salud -= max(0, daño)
-            print(f"{self.nombre} ataca con su Arma.")
             self.poder += 2
+            return f"{self.nombre} ataca con su Arma."
+        else: 
+            return f"{enemigo.nombre} recibe un ataque con Arma y muere."
 
     def __str__(self) -> str:
         return f"{self.nombre} - ({self.descripcion})"

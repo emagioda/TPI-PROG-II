@@ -1,0 +1,1 @@
+jugador2.partidas_ganadas
